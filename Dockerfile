@@ -9,15 +9,19 @@ RUN apt-get update && apt-get install -y \
     libnss3 \
     libgconf-2-4 \
     libatk-bridge2.0-0 \
+    libgtk-3-0 \
+    libxkbcommon-x11 \
     libxrandr2 \
     libxdamage1 \
     libgbm-dev \
     libasound2 \
     libfontconfig \
     libxshmfence-dev \
+    libsecret-1-0 \
+    libgtk2.0-0 \
+    libxtst6 \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
-
 # 3. Setup Project Directory and Copy Files
 WORKDIR /usr/src/app
 
@@ -35,6 +39,7 @@ EXPOSE 7300
 
 # 7. Start the server (using the npm start script)
 CMD [ "npm", "start" ]
+
 
 
 
