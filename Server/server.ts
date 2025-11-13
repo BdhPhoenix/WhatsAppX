@@ -125,8 +125,12 @@ const socketServer = net.createServer((socket) => {
 });
 
 // Start servers
-socketServer.listen(utils.SERVER_CONFIG.PORT, utils.SERVER_CONFIG.HOST);
-client.initialize();
-app.listen(utils.SERVER_CONFIG.PORT, utils.SERVER_CONFIG.HOST); // HTTP API is now on 7300
-socketServer.listen(utils.SERVER_CONFIG.HTTP_PORT, utils.SERVER_CONFIG.HOST); // TCP Socket is now on 7301
+// 1. HTTP API (app) runs on the main port (7300, via utils.SERVER_CONFIG.PORT).
+// This port is reliably exposed by Render for the main service URL.
+app.listen(utils.SERVER_CONFIG.PORT, utils.SERVER_CONFIG.HOST);
+
+// 2. TCP Socket Server (socketServer) runs on the secondary port (7301, via utils.SERVER_CONFIG.HTTP_PORT).
+socketServer.listen(utils.SERVER_CONFIG.HTTP_PORT, utils.SERVER_CONFIG.HOST);
+
+// 3. Initialize the WhatsApp Client
 client.initialize();
