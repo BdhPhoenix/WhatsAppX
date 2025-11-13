@@ -1,8 +1,8 @@
 # 1. Base Image: Use a Node.js image
 FROM node:lts-slim
 
-# 2. Install Google Chrome Stable (The browser needed by whatsapp-web.js)
-# ... (Keep the RUN apt-get install commands here) ...
+# 2. Install Chromium, FFmpeg, and the most comprehensive list of dependencies
+# Removed the unavailable 'libxkbcommon-x11' package.
 RUN apt-get update && apt-get install -y \
     chromium \
     ffmpeg \
@@ -10,7 +10,6 @@ RUN apt-get update && apt-get install -y \
     libgconf-2-4 \
     libatk-bridge2.0-0 \
     libgtk-3-0 \
-    libxkbcommon-x11 \
     libxrandr2 \
     libxdamage1 \
     libgbm-dev \
@@ -22,6 +21,7 @@ RUN apt-get update && apt-get install -y \
     libxtst6 \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
+    
 # 3. Setup Project Directory and Copy Files
 WORKDIR /usr/src/app
 
@@ -39,6 +39,7 @@ EXPOSE 7300
 
 # 7. Start the server (using the npm start script)
 CMD [ "npm", "start" ]
+
 
 
 
