@@ -1,16 +1,19 @@
-# ... (Previous code for FROM and RUN apt-get install) ...
+# 1. Base Image: Use a Node.js image
+FROM node:lts-slim
+
+# 2. Install Google Chrome Stable (The browser needed by whatsapp-web.js)
+# ... (Keep the RUN apt-get install commands here) ...
 
 # 3. Setup Project Directory and Copy Files
 WORKDIR /usr/src/app
 
 # CRITICAL FIX: Copy the files *from* the Server/ folder 
-# into the Docker working directory
 COPY Server/package*.json ./
 
 # 4. Install Node dependencies
 RUN npm install
 
-# 5. Copy the rest of the source code (including chat.ts, server.ts, etc.)
+# 5. Copy the rest of the source code
 COPY Server/. .
 
 # 6. Expose the port (Render will use this)
