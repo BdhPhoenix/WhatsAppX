@@ -12,15 +12,16 @@ RUN apt-get update && apt-get install -y wget gnupg ca-certificates \
 
 # 3. Setup Project Directory and Copy Files
 WORKDIR /usr/src/app
-COPY package*.json ./
+
+# CRITICAL FIX: Copy files from the Server/ folder into the workdir
+# This assumes your package.json and node modules are defined in the Server folder!
+COPY Server/package*.json ./
 
 # 4. Install Node dependencies
 RUN npm install
 
-# 5. Copy the rest of the source code
-COPY . .
+# 5. Copy the rest of the source code (assuming the Server folder holds the rest of the code)
+COPY Server/. .
 
-# 6. Expose the port (Render will use this)
-EXPOSE 7300
-
-# 7.
+# If the rest of the project files are NOT inside Server/ but in the root, 
+# you might need to adjust the last COPY command. But for now, let's assume all code is in Server/
