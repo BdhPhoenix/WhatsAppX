@@ -6,6 +6,17 @@ FROM node:lts-slim
 RUN apt-get update && apt-get install -y \
     chromium \
     ffmpeg \
+    libnss3 \
+    libgconf-2-4 \
+    libatk-bridge2.0-0 \
+    libcups-common \
+    libxrandr2 \
+    libxdamage1 \
+    libgbm-dev \
+    libasound2 \
+    libfontconfig \
+    libxshmfence-dev \
+    --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # 3. Setup Project Directory and Copy Files
@@ -25,5 +36,6 @@ EXPOSE 7300
 
 # 7. Start the server (using the npm start script)
 CMD [ "npm", "start" ]
+
 
 
