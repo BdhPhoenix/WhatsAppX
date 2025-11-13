@@ -127,4 +127,6 @@ const socketServer = net.createServer((socket) => {
 // Start servers
 socketServer.listen(utils.SERVER_CONFIG.PORT, utils.SERVER_CONFIG.HOST);
 client.initialize();
-app.listen(utils.SERVER_CONFIG.HTTP_PORT);
+app.listen(utils.SERVER_CONFIG.PORT, utils.SERVER_CONFIG.HOST); // HTTP API is now on 7300
+socketServer.listen(utils.SERVER_CONFIG.HTTP_PORT, utils.SERVER_CONFIG.HOST); // TCP Socket is now on 7301
+client.initialize();
