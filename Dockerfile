@@ -9,7 +9,6 @@ RUN apt-get update && apt-get install -y \
     libnss3 \
     libgconf-2-4 \
     libatk-bridge2.0-0 \
-    libcups-common \
     libxrandr2 \
     libxdamage1 \
     libgbm-dev \
@@ -36,6 +35,7 @@ EXPOSE 7300
 
 # 7. Start the server (using the npm start script)
 CMD [ "npm", "start" ]
+
 
 
 
